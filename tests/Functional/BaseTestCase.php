@@ -1,7 +1,7 @@
 <?php
 
 namespace Tests\Functional;
-namespace PHPUnit\Framework\PHPUnit_Framework_TestCase;
+//namespace PHPUnit\Framework\PHPUnit_Framework_TestCase;
 
 use Slim\App;
 use Slim\Http\Request;
@@ -14,7 +14,7 @@ use Slim\Http\Environment;
  * tuned to the specifics of this skeleton app, so if your needs are
  * different, you'll need to change it.
  */
-class BaseTestCase extends \PHPUnit_Framework_TestCase
+class BaseTestCase extends \PHPUnit\Framework\TestCase
 {
     /**
      * Use middleware when running application?
@@ -31,13 +31,14 @@ class BaseTestCase extends \PHPUnit_Framework_TestCase
      * @param array|object|null $requestData the request data
      * @return \Slim\Http\Response
      */
-    public function runApp($requestMethod, $requestUri, $requestData = null)
+    public function runApp($requestMethod, $requestUri, $requestData = null, $headers = [])
     {
         // Create a mock environment for testing with
         $environment = Environment::mock(
             [
                 'REQUEST_METHOD' => $requestMethod,
-                'REQUEST_URI' => $requestUri
+                'REQUEST_URI' => $requestUri,
+                'HEADERS' => $headers
             ]
         );
 
