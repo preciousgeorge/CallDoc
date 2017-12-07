@@ -33,13 +33,16 @@ class BaseTestCase extends \PHPUnit\Framework\TestCase
      */
     public function runApp($requestMethod, $requestUri, $requestData = null, $headers = [])
     {
+        $request = [
+            'REQUEST_METHOD' => $requestMethod,
+            'REQUEST_URI' => $requestUri,
+            
+        ];
+
+        array_merge($request, $headers);
         // Create a mock environment for testing with
         $environment = Environment::mock(
-            [
-                'REQUEST_METHOD' => $requestMethod,
-                'REQUEST_URI' => $requestUri,
-                'HEADERS' => $headers
-            ]
+            $request
         );
 
         // Set up a request object based on the environment
